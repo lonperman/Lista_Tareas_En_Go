@@ -14,6 +14,22 @@ func (t *taskList) eliminarDeList(index int){
 	t.tasks = append(t.tasks[:index], t.tasks[index + 1:]... )
 }
 
+func (t *taskList) imprimirLista(){
+	for _, tarea := range t.tasks {
+		fmt.Println("Nombre:", tarea.nombre)
+		fmt.Println("Descripcion:", tarea.descripcion)
+	}
+}
+
+func (t *taskList) imprimirListaCompletados(){
+	for _, tarea := range t.tasks {
+		if tarea.completado {
+			fmt.Println("Nombre:", tarea.nombre)
+			fmt.Println("Descripcion:", tarea.descripcion)
+		}
+	}
+}
+
 type task struct {
 	nombre      string
 	descripcion string
@@ -53,10 +69,10 @@ func main() {
 			t1, t2,
 		},
 	}
-
-	fmt.Println(lista.tasks[0])
 	lista.agregarAlista(t3)
-	fmt.Println(len(lista.tasks))
-	lista.eliminarDeList(1)
-	fmt.Println(len(lista.tasks))
+	lista.imprimirLista()	
+	lista.tasks[0].marcarCompletada()
+	fmt.Println("Tareas Completadas")
+	lista.imprimirListaCompletados()
+	
 }
